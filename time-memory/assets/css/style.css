@@ -1,9 +1,10 @@
-/* High-contrast Black & White Style */
+/* High-contrast Black & White Style - Professional Clinical Aesthetic */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --border-color: #000000;
     --border-width: 5px;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body.tm-dark-mode {
@@ -15,8 +16,10 @@ body.tm-dark-mode {
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.8;
     font-size: 18px;
+    font-family: var(--font-stack);
+    letter-spacing: 0.02em;
     margin: 0;
     padding: 0;
     direction: rtl;
@@ -27,18 +30,18 @@ body {
 .tm-container {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 40px;
-    box-shadow: 15px 15px 0px var(--border-color);
-    max-width: 1000px;
-    margin: 50px auto;
+    padding: 50px;
+    box-shadow: 20px 20px 0px var(--border-color);
+    max-width: 1100px;
+    margin: 60px auto;
 }
 
 /* Floating Screen Badges (Navigation Tabs) */
 .tm-nav {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     justify-content: center;
 }
 
@@ -46,17 +49,18 @@ body {
     background: var(--bg-color);
     color: var(--text-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 15px 30px;
+    padding: 18px 36px;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 5px 5px 0px var(--border-color);
-    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 8px 8px 0px var(--border-color);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
 }
 
 .tm-nav-btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: 2px 2px 0px var(--border-color);
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0px var(--border-color);
 }
 
 .tm-nav-btn.active {
@@ -67,16 +71,16 @@ body {
 /* Utility Bar */
 #tm-utility-bar {
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 10px 20px;
+    padding: 12px 24px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     z-index: 1000;
-    box-shadow: 10px 10px 0px var(--border-color);
+    box-shadow: 12px 12px 0px var(--border-color);
 }
 
 /* Form Styling */
@@ -84,29 +88,32 @@ input, textarea, select {
     border: var(--border-width) solid var(--border-color);
     background: var(--bg-color);
     color: var(--text-color);
-    padding: 18px;
+    padding: 22px;
     font-size: 20px;
-    margin-bottom: 25px;
+    font-family: var(--font-stack);
+    margin-bottom: 30px;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 0; /* Strict square corners */
 }
 
 input:focus, textarea:focus, select:focus {
     outline: none;
-    box-shadow: 0 0 0 5px var(--text-color);
+    box-shadow: 0 0 0 6px var(--text-color);
 }
 
 .tm-btn {
     background: var(--text-color);
     color: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 18px 36px;
-    font-weight: bold;
+    padding: 20px 40px;
+    font-weight: 900;
     font-size: 20px;
     cursor: pointer;
     text-align: center;
     width: auto;
     display: inline-block;
+    transition: all 0.2s;
 }
 
 .tm-btn:hover {
@@ -118,17 +125,18 @@ input:focus, textarea:focus, select:focus {
 .tm-record-item {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    margin-bottom: 30px;
-    padding: 25px;
-    box-shadow: 8px 8px 0px var(--border-color);
+    margin-bottom: 40px;
+    padding: 30px;
+    box-shadow: 10px 10px 0px var(--border-color);
     position: relative;
 }
 
-/* Privacy Blind */
+/* Privacy Blind - Gaussian Blur */
 .tm-privacy-blind {
-    filter: blur(8px);
-    transition: filter 0.3s;
+    filter: blur(12px);
+    transition: filter 0.4s ease-in-out;
     user-select: none;
+    cursor: help;
 }
 
 .tm-privacy-blind:hover, .tm-privacy-blind:active {
@@ -139,26 +147,28 @@ input:focus, textarea:focus, select:focus {
 /* Sidebar */
 #tm-recall-sidebar {
     border: var(--border-width) solid var(--border-color);
-    padding: 20px;
-    margin-top: 30px;
+    padding: 25px;
+    margin-top: 40px;
     background: var(--bg-color);
+    box-shadow: 8px 8px 0px var(--border-color);
 }
 
 /* Auto-save indicator */
 #tm-autosave-indicator {
-    font-size: 14px;
-    font-style: italic;
-    margin-bottom: 10px;
-    height: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    height: 25px;
+    color: var(--text-color);
 }
 
 hr {
     border: 0;
     border-top: var(--border-width) solid var(--border-color);
-    margin: 50px 0;
+    margin: 60px 0;
 }
 
 /* Search Box */
-#tm-search-box {
-    margin-bottom: 30px;
+#tm-search-box input {
+    font-style: italic;
 }
