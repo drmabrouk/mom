@@ -11,13 +11,15 @@ function tm_update_db_schema() {
         category varchar(100) NOT NULL,
         record_title varchar(255) NOT NULL,
         record_details text NOT NULL,
-        record_date date NOT NULL,
+        record_date datetime NOT NULL,
         image_url text DEFAULT NULL,
         audio_url text DEFAULT NULL,
         related_id mediumint(9) DEFAULT NULL,
         reminder_date datetime DEFAULT NULL,
         reminder_frequency varchar(20) DEFAULT NULL,
         is_encrypted tinyint(1) DEFAULT 0 NOT NULL,
+        amount decimal(15,2) DEFAULT NULL,
+        parent_id mediumint(9) DEFAULT NULL,
         created_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
         PRIMARY KEY  (id)
     ) $charset_collate;";
