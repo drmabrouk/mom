@@ -1,69 +1,38 @@
 jQuery(document).ready(function($) {
-    let inactivityTimer;
-    const INACTIVITY_LIMIT = 15 * 60 * 1000; // 15 minutes
-
-    function resetInactivityTimer() {
-        clearTimeout(inactivityTimer);
-        inactivityTimer = setTimeout(logout, INACTIVITY_LIMIT);
-    }
-
-    function logout() {
-        $.post(tm_ajax_obj.ajax_url, { action: 'tm_logout', security: tm_ajax_obj.nonce }, function() {
-            location.reload();
-        });
-    }
-
-    // Monitor events for activity
-    $(document).on('mousemove keypress click scroll touchstart', resetInactivityTimer);
-    resetInactivityTimer();
-
-    // Login Form Submission
-    $(document).on('submit', '#tm-login-form', function(e) {
-        e.preventDefault();
-        const data = {
-            action: 'tm_login',
-            security: tm_ajax_obj.nonce,
-            username: $('#tm_username').val(),
-            password: $('#tm_password').val()
-        };
-        $.post(tm_ajax_obj.ajax_url, data, function(response) {
-            if (response.success) {
-                location.reload();
-            } else {
-                alert(response.data.message);
-            }
-        });
-    });
-
-    // Logout Button
-    $(document).on('click', '#tm-logout-btn', function(e) {
-        e.preventDefault();
-        logout();
-    });
-
     // Check auth status on load
-    $.post(tm_ajax_obj.ajax_url, { action: 'tm_check_auth', security: tm_ajax_obj.nonce }, function(response) {
-        if (response.success) {
-            if (response.data.authenticated) {
-                $('#tm-auth-status').html('<button id="tm-logout-btn" class="tm-btn">تسجيل الخروج</button>');
-                // Trigger UI load
-                $(document).trigger('tm_auth_success');
-            } else {
-                showLoginForm();
-            }
+    $.post(tm_ajax_obj.ajax_url, { action: 'tm_check_auth', security: tm_ajax_obj.nonce }, function(res) {
+        if (res.success && res.data.authenticated) {
+            $(document).trigger('tm_auth_success');
+        } else {
+            showLogin();
         }
     });
 
-    function showLoginForm() {
-        $('#tm-content').html(`
-            <div class="tm-login-box" style="max-width:400px; margin: 50px auto; text-align:center;">
-                <h2>بوابة الدخول السري</h2>
-                <form id="tm-login-form">
-                    <input type="text" id="tm_username" placeholder="اسم المستخدم" required autocomplete="off">
-                    <input type="password" id="tm_password" placeholder="كلمة المرور" required autocomplete="off">
-                    <button type="submit" class="tm-btn">تأكيد الدخول</button>
-                </form>
+    function showLogin() {
+        $('body').html(`
+            <div class="tm-modal-overlay" style="display:flex;">
+                <div class="tm-modal-box">
+                    <h2 style="font-size: 40px; font-weight:900; margin-bottom: 40px;">بوابة الذاكرة العميقة</h2>
+                    <form id="tm-login-form">
+                        <input type="text" id="tm_user" placeholder="المعرف" required style="margin-bottom:20px;">
+                        <input type="password" id="tm_pass" placeholder="كلمة المرور" required style="margin-bottom:30px;">
+                        <button type="submit" class="tm-btn-main">فتح التشفير 🔓</button>
+                    </form>
+                </div>
             </div>
         `);
     }
+
+    $(document).on('submit', '#tm-login-form', function(e) {
+        e.preventDefault();
+        $.post(tm_ajax_obj.ajax_url, {
+            action: 'tm_login',
+            security: tm_ajax_obj.nonce,
+            username: $('#tm_user').val(),
+            password: $('#tm_pass').val()
+        }, function(res) {
+            if (res.success) location.reload();
+            else alert('المعرف غير مصرح له.');
+        });
+    });
 });
