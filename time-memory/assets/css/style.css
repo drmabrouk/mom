@@ -1,10 +1,11 @@
-/* High-contrast Black & White Style - Professional Clinical Aesthetic */
+/* Immersive Full-Screen CSS - Professional Clinical Aesthetic */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --border-color: #000000;
     --border-width: 5px;
     --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --header-height: 80px;
 }
 
 body.tm-dark-mode {
@@ -13,54 +14,98 @@ body.tm-dark-mode {
     --border-color: #ffffff;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.8;
-    font-size: 18px;
+html, body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
     font-family: var(--font-stack);
-    letter-spacing: 0.02em;
-    margin: 0;
-    padding: 0;
-    direction: rtl;
-    text-align: right;
-    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--bg-color);
 }
 
-.tm-container {
+.tm-container-fullscreen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: var(--bg-color);
+    color: var(--text-color);
+    direction: rtl;
+}
+
+#tm-global-header {
+    height: var(--header-height);
+    background: var(--bg-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 100;
+}
+
+#tm-app-logo {
+    font-weight: 900;
+    font-size: 28px;
+    margin: 0;
+}
+
+#tm-global-search-container {
+    flex: 0 0 40%;
+}
+
+#tm-global-search-container input {
+    margin-bottom: 0 !important;
+    padding: 12px 20px !important;
+    font-size: 16px;
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 50px;
-    box-shadow: 20px 20px 0px var(--border-color);
-    max-width: 1100px;
-    margin: 60px auto;
+    min-height: auto !important;
 }
 
-/* Floating Screen Badges (Navigation Tabs) */
+#tm-layout-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+#tm-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+    -webkit-overflow-scrolling: touch;
+}
+
+#tm-recall-sidebar {
+    width: 350px;
+    border-right: var(--border-width) solid var(--border-color);
+    background: var(--bg-color);
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 50;
+}
+
+/* Nav Badges - Oversized for Touch */
 .tm-nav {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
     margin-bottom: 40px;
-    justify-content: center;
 }
 
 .tm-nav-btn {
+    padding: 20px 30px;
+    font-size: 18px;
+    font-weight: 900;
     background: var(--bg-color);
     color: var(--text-color);
     border: var(--border-width) solid var(--border-color);
-    padding: 18px 36px;
-    font-weight: 900;
-    font-size: 22px;
-    text-transform: uppercase;
+    box-shadow: 6px 6px 0px var(--border-color);
     cursor: pointer;
-    box-shadow: 8px 8px 0px var(--border-color);
-    transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
-}
-
-.tm-nav-btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 4px 4px 0px var(--border-color);
+    min-width: 150px;
+    text-align: center;
 }
 
 .tm-nav-btn.active {
@@ -68,107 +113,122 @@ body {
     color: var(--bg-color);
 }
 
-/* Utility Bar */
-#tm-utility-bar {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg-color);
-    border: var(--border-width) solid var(--border-color);
-    padding: 12px 24px;
-    display: flex;
-    gap: 20px;
-    z-index: 1000;
-    box-shadow: 12px 12px 0px var(--border-color);
-}
-
-/* Form Styling */
-input, textarea, select {
+/* Responsive Touch Targets */
+input, select, textarea, .tm-btn {
+    min-height: 60px;
+    font-size: 18px !important;
+    padding: 15px 25px !important;
     border: var(--border-width) solid var(--border-color);
     background: var(--bg-color);
     color: var(--text-color);
-    padding: 22px;
-    font-size: 20px;
-    font-family: var(--font-stack);
-    margin-bottom: 30px;
-    width: 100%;
     box-sizing: border-box;
-    border-radius: 0; /* Strict square corners */
+    margin-bottom: 20px;
 }
 
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    box-shadow: 0 0 0 6px var(--text-color);
+/* Modal Overlay */
+.tm-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
-.tm-btn {
-    background: var(--text-color);
-    color: var(--bg-color);
-    border: var(--border-width) solid var(--border-color);
-    padding: 20px 40px;
-    font-weight: 900;
-    font-size: 20px;
-    cursor: pointer;
-    text-align: center;
-    width: auto;
-    display: inline-block;
-    transition: all 0.2s;
-}
-
-.tm-btn:hover {
+.tm-modal-box {
     background: var(--bg-color);
-    color: var(--text-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 40px;
+    box-shadow: 15px 15px 0px var(--border-color);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
 }
 
-/* Records List */
+/* Record Items */
 .tm-record-item {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding: 30px;
     box-shadow: 10px 10px 0px var(--border-color);
-    position: relative;
+}
+
+/* Utility Bar - Fixed Bottom */
+#tm-utility-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+#tm-utility-bar .tm-btn {
+    width: 50px;
+    height: 50px;
+    min-height: 50px !important;
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px !important;
+    box-shadow: 5px 5px 0px var(--border-color);
+}
+
+/* Stats Counter */
+#tm-stats-counter {
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid var(--border-color);
+    padding: 5px 10px;
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Specialized Section Controls */
+.tm-action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 /* Privacy Blind - Gaussian Blur */
 .tm-privacy-blind {
     filter: blur(12px);
-    transition: filter 0.4s ease-in-out;
-    user-select: none;
+    transition: filter 0.3s ease-in-out;
     cursor: help;
 }
+.tm-privacy-blind:hover { filter: none; }
 
-.tm-privacy-blind:hover, .tm-privacy-blind:active {
-    filter: none;
-    user-select: text;
+/* Category specific privacy */
+[data-cat="passwords"] .tm-record-details,
+[data-cat="emails"] .tm-record-details,
+[data-cat="usernames"] .tm-record-details {
+    filter: blur(12px);
 }
 
-/* Sidebar */
-#tm-recall-sidebar {
-    border: var(--border-width) solid var(--border-color);
-    padding: 25px;
-    margin-top: 40px;
-    background: var(--bg-color);
-    box-shadow: 8px 8px 0px var(--border-color);
-}
-
-/* Auto-save indicator */
-#tm-autosave-indicator {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    height: 25px;
-    color: var(--text-color);
-}
-
-hr {
-    border: 0;
-    border-top: var(--border-width) solid var(--border-color);
-    margin: 60px 0;
-}
-
-/* Search Box */
-#tm-search-box input {
-    font-style: italic;
+/* Mobile Adaptations */
+@media (max-width: 768px) {
+    #tm-global-header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+    #tm-global-search-container {
+        width: 100%;
+    }
+    #tm-recall-sidebar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 80%;
+    }
+    .tm-nav-btn {
+        flex: 1 0 40%;
+    }
 }
