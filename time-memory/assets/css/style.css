@@ -1,73 +1,164 @@
 /* High-contrast Black & White Style */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --border-color: #000000;
+    --border-width: 5px;
+}
+
+body.tm-dark-mode {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+}
+
 body {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    text-align: right;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .tm-container {
-    background: #fff;
-    border: 3px solid #000;
-    padding: 30px;
-    box-shadow: 10px 10px 0px #000;
-    margin-top: 50px;
+    background: var(--bg-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 40px;
+    box-shadow: 15px 15px 0px var(--border-color);
+    max-width: 1000px;
+    margin: 50px auto;
 }
 
-.tm-btn {
-    background: #000;
-    color: #fff;
-    border: 2px solid #000;
-    padding: 12px 24px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-}
-
-.tm-btn:hover {
-    background: #fff;
-    color: #000;
-}
-
-.tm-btn.active {
-    background: #fff;
-    color: #000;
-    text-decoration: underline;
-}
-
-input, textarea, select {
-    border: 2px solid #000;
-    background: #fff;
-    color: #000;
-    padding: 12px;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: 3px solid #000;
+/* Floating Screen Badges (Navigation Tabs) */
+.tm-nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    justify-content: center;
 }
 
 .tm-nav-btn {
-    margin-bottom: 10px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 15px 30px;
+    font-weight: 900;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 5px 5px 0px var(--border-color);
+    transition: transform 0.1s, box-shadow 0.1s;
 }
 
+.tm-nav-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.tm-nav-btn.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Utility Bar */
+#tm-utility-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 10px 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+    box-shadow: 10px 10px 0px var(--border-color);
+}
+
+/* Form Styling */
+input, textarea, select {
+    border: var(--border-width) solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 18px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 5px var(--text-color);
+}
+
+.tm-btn {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 18px 36px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    width: auto;
+    display: inline-block;
+}
+
+.tm-btn:hover {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Records List */
 .tm-record-item {
-    background: #fff;
-    border: 3px solid #000;
-    margin-bottom: 20px;
+    background: var(--bg-color);
+    border: var(--border-width) solid var(--border-color);
+    margin-bottom: 30px;
+    padding: 25px;
+    box-shadow: 8px 8px 0px var(--border-color);
+    position: relative;
+}
+
+/* Privacy Blind */
+.tm-privacy-blind {
+    filter: blur(8px);
+    transition: filter 0.3s;
+    user-select: none;
+}
+
+.tm-privacy-blind:hover, .tm-privacy-blind:active {
+    filter: none;
+    user-select: text;
+}
+
+/* Sidebar */
+#tm-recall-sidebar {
+    border: var(--border-width) solid var(--border-color);
     padding: 20px;
-    box-shadow: 5px 5px 0px #000;
+    margin-top: 30px;
+    background: var(--bg-color);
+}
+
+/* Auto-save indicator */
+#tm-autosave-indicator {
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 10px;
+    height: 20px;
 }
 
 hr {
     border: 0;
-    border-top: 3px solid #000;
-    margin: 40px 0;
+    border-top: var(--border-width) solid var(--border-color);
+    margin: 50px 0;
 }
 
-/* RTL Adjustments */
-body {
-    direction: rtl;
-    text-align: right;
+/* Search Box */
+#tm-search-box {
+    margin-bottom: 30px;
 }
